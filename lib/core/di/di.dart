@@ -3,6 +3,7 @@ import 'package:flutter_task/features/home/data/remote_source/home_remote_data_s
 import 'package:flutter_task/features/home/data/repository/home_repository_impl.dart';
 import 'package:flutter_task/features/home/domain/repository/home_repository.dart';
 import 'package:flutter_task/features/home/domain/usecase/fetch_products_use_case.dart';
+import 'package:flutter_task/features/home/presentation/managers/home_cubit.dart';
 import 'package:get_it/get_it.dart';
 
 final GetIt getIt = GetIt.instance;
@@ -20,4 +21,7 @@ setupServiceLocator() {
   getIt.registerSingleton<FetchProductsUsecase>(
     FetchProductsUsecase(repository: getIt.get<HomeRepository>()),
   );
+
+  // Cubit
+  getIt.registerFactory(() => HomeCubit(getIt.get<FetchProductsUsecase>()));
 }
