@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 
-void main() => runApp(const MyApp());
+import 'core/di/di.dart';
+import 'flutter_task_app.dart';
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+final getIt = GetIt.instance;
 
-  @override
-  Widget build(BuildContext context) =>
-      MaterialApp(home: Scaffold());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await setupServiceLocator();
+
+  runApp(const FlutterTaskApp());
 }
